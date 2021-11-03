@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ml="clr-namespace:MoralesLarios.Utilities.Excel;assembly=MoralesLarios.Utilities"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:local="clr-namespace:Progressive_calc"
         mc:Ignorable="d"
         Title="Calculate breakpoints" Height="471" Width="800"
     >
     <Grid>
-        <Grid.RowDefinitions>            
+        <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="367*"/>
             <RowDefinition Height="50*"/>
@@ -19,18 +20,26 @@
             <ColumnDefinition Width="399*"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Column="0" x:Name="DGBreakPoints" Grid.RowSpan="3" 
+        <DataGrid Grid.Column="0" x:Name="DGBreakPoints" Grid.RowSpan="2" 
                 AutoGenerateColumns="True"  
                 RowHeight="20"
                 ItemsSource="{Binding BreakpointDefinition}" 
-                CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False" SelectionMode="Single"
+                CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False" SelectionMode="Extended"
+                ml:ExcelActions.EnabledCopyExcel ="True"
+                ml:ExcelActions.EnabledPasteExcel="True"
+                ml:ExcelActions.CreateContextMenu ="True"
+                ml:ExcelActions.ShowErrorMessages ="True" Margin="0,0,0,0"
         />
         <Button Content="Calculate" HorizontalAlignment="Center" Margin="0,5,0,10" Grid.Row="3" Width="224" Click="Button_Click" IsDefault="True"/>
         <DataGrid Grid.Column="1" Grid.RowSpan="4" 
                 AutoGenerateColumns="True" 
                 x:Name="DGValues"         
                 ItemsSource="{Binding ValueRowDefinition}"
-                CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False" SelectionMode="Single"
+                CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False" SelectionMode="Extended"
+                ml:ExcelActions.EnabledCopyExcel ="True"
+                ml:ExcelActions.EnabledPasteExcel="True"
+                ml:ExcelActions.CreateContextMenu ="True"
+                ml:ExcelActions.ShowErrorMessages ="True"
         />
 
     </Grid>

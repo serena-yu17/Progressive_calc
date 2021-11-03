@@ -12,22 +12,21 @@ namespace Progressive_calc
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly AppDataContext appDataContext = new AppDataContext(
-            new ObservableCollection<BreakpointDefinition> {
-                new BreakpointDefinition(0,0),
-                new BreakpointDefinition(100, 10),
-                new BreakpointDefinition(500, 20),
-                new BreakpointDefinition(1000, 50)
-            }, new ObservableCollection<ValueRowDefinition>()
+        private readonly AppDataContext appDataContext = new AppDataContext(
+            new ObservableCollection<BreakpointDefinition>(), 
+            new ObservableCollection<ValueRowDefinition>(Enumerable.Repeat(new ValueRowDefinition(null,null), 1000))
         );
 
         public MainWindow()
         {
-            for (int i = 0; i < 100; i++)
-            {
-                appDataContext.BreakpointDefinition.Add(new BreakpointDefinition(null, null));
-                appDataContext.ValueRowDefinition.Add(new ValueRowDefinition(null, null));
-            }
+            List<BreakpointDefinition> initialBreakpoints = new List<BreakpointDefinition> {
+                new BreakpointDefinition(0,0),
+                new BreakpointDefinition(100, 10),
+                new BreakpointDefinition(500, 20),
+                new BreakpointDefinition(1000, 50)
+            };
+            initialBreakpoints.AddRange(Enumerable.Repeat(new BreakpointDefinition(null, null), 1000));
+            appDataContext.BreakpointDefinition = new ObservableCollection<BreakpointDefinition>(initialBreakpoints);
 
             InitializeComponent();
             this.DataContext = appDataContext;
