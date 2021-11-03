@@ -1,8 +1,9 @@
 ﻿using Progressive_calc.models;
+using Progressive_calc.services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Progressive_calc
@@ -13,8 +14,8 @@ namespace Progressive_calc
     public partial class MainWindow : Window
     {
         private readonly AppDataContext appDataContext = new AppDataContext(
-            new ObservableCollection<BreakpointDefinition>(), 
-            new ObservableCollection<ValueRowDefinition>(Enumerable.Repeat(new ValueRowDefinition(null,null), 1000))
+            new ObservableCollection<BreakpointDefinition>(),
+            new ObservableCollection<ValueRowDefinition>()
         );
 
         public MainWindow()
@@ -37,37 +38,23 @@ namespace Progressive_calc
             var breakPoints = new List<BreakpointDefinition> { new BreakpointDefinition(0, 0) };
             breakPoints.AddRange(
                 appDataContext.BreakpointDefinition
-                .Where(item => item.Breakpoint != null && item.Additional_price != null && item.Breakpoint > 0 )
-                .OrderBy(item => item.Breakpoint)               
+                .Where(item => item.Breakpoint != null && item.Additional_price != null && item.Breakpoint > 0)
+                .OrderBy(item => item.Breakpoint)
             );
 
-            var newRowDefs = processAsync(appDataContext.ValueRowDefinition, breakPoints);
-            appDataContext.ValueRowDefinition = newRowDefs;
+            var newRowDefs = BreakPointServices.ProcessBreakPoints(appDataContext.ValueRowDefinition, breakPoints);
+            appDataContext.ValueRowDefinition = new ObservableCollection<ValueRowDefinition>(newRowDefs);
             DGValues.ItemsSource = newRowDefs;
         }
 
 
-        private ObservableCollection<ValueRowDefinition> processAsync(IEnumerable<ValueRowDefinition> valueData, List<BreakpointDefinition> breakpoints)
+        private void DataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
-            var rawValues = valueData.ToArray();
-            foreach (var rawValPair in rawValues)
-            {              
-                if (rawValPair.RawValue == null || rawValPair.RawValue < 0)
-                {
-                    continue;
-                }
-                var breakptCollection = breakpoints.TakeWhile(item => item.Breakpoint < rawValPair.RawValue);
-                var breakpt = breakptCollection.LastOrDefault();
-                if (breakpt != default)
-                {
-                    rawValPair.ResultValue = rawValPair.RawValue + breakpt.Additional_price;
-                }
-                else
-                {
-                    rawValPair.ResultValue = null;
-                }
+            PropertyDescriptor desc = e.PropertyDescriptor as PropertyDescriptor;
+            if (desc.Attributes[typeof(ColumnNameAttribute)] is ColumnNameAttribute att)
+            {
+                e.Column.Header = att.Name;
             }
-            return new ObservableCollection<ValueRowDefinition>(rawValues);            
         }
     }
 }

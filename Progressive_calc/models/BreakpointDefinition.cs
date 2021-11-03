@@ -10,11 +10,15 @@ namespace Progressive_calc.models
         public int? Breakpoint { get => breakpoint; set => breakpoint = value; }
         public int? Additional_price { get => additional_price; set => additional_price = value; }
 
+
+
         public BreakpointDefinition(int? breakpointValue, int? price)
         {
             this.Breakpoint = breakpointValue;
             this.Additional_price = price;
         }
+
+        public BreakpointDefinition() { }
     }
 
     public class ValueRowDefinition
@@ -30,6 +34,8 @@ namespace Progressive_calc.models
             this.RawValue = rawValue;
             this.ResultValue = resultValue;
         }
+
+        public ValueRowDefinition() { }
     }
 
     public class AppDataContext
@@ -40,8 +46,15 @@ namespace Progressive_calc.models
             ValueRowDefinition = valueRowDefinition;
         }
 
-        public ObservableCollection<BreakpointDefinition> BreakpointDefinition { get; set; }
-        public ObservableCollection<ValueRowDefinition> ValueRowDefinition { get; set; }
+        public AppDataContext() { }
 
+        public ObservableCollection<BreakpointDefinition> BreakpointDefinition { get; set; }
+        public ObservableCollection<ValueRowDefinition> ValueRowDefinition { get; set; }        
+    }
+
+    public class ColumnNameAttribute : System.Attribute
+    {
+        public ColumnNameAttribute(string Name) { this.Name = Name; }
+        public string Name { get; set; }
     }
 }
