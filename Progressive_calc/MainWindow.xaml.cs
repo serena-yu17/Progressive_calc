@@ -26,7 +26,7 @@ namespace Progressive_calc
                 new BreakpointDefinition(500, 20),
                 new BreakpointDefinition(1000, 50)
             };
-            initialBreakpoints.AddRange(Enumerable.Repeat(new BreakpointDefinition(null, null), 1000));
+            initialBreakpoints.AddRange(Enumerable.Repeat(new BreakpointDefinition(), 10));
             appDataContext.BreakpointDefinition = new ObservableCollection<BreakpointDefinition>(initialBreakpoints);
 
             InitializeComponent();
@@ -39,7 +39,6 @@ namespace Progressive_calc
             appDataContext.ValueRowDefinition = new ObservableCollection<ValueRowDefinition>(newRowDefs);
             DGValues.ItemsSource = appDataContext.ValueRowDefinition;
         }
-
 
         private void DataGrid_AutoGeneratingColumn(object sender, System.Windows.Controls.DataGridAutoGeneratingColumnEventArgs e)
         {
