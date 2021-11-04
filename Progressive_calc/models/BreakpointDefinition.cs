@@ -4,15 +4,14 @@ namespace Progressive_calc.models
 {
     public class BreakpointDefinition
     {
-        private int? breakpoint;
-        private int? additional_price;
+        private decimal? breakpoint;
+        private decimal? additional_price;
 
-        public int? Breakpoint { get => breakpoint; set => breakpoint = value; }
-        public int? Additional_price { get => additional_price; set => additional_price = value; }
+        public decimal? Breakpoint { get => breakpoint; set => breakpoint = value; }
+        public decimal? Additional_price { get => additional_price; set => additional_price = value; }
 
 
-
-        public BreakpointDefinition(int? breakpointValue, int? price)
+        public BreakpointDefinition(decimal? breakpointValue, decimal? price)
         {
             this.Breakpoint = breakpointValue;
             this.Additional_price = price;
@@ -23,13 +22,13 @@ namespace Progressive_calc.models
 
     public class ValueRowDefinition
     {
-        private int? rawValue;
-        private int? resultValue;
+        private decimal? rawValue;
+        private decimal? resultValue;
 
-        public int? RawValue { get => rawValue; set => rawValue = value; }
-        public int? ResultValue { get => resultValue; set => resultValue = value; }
+        public decimal? RawValue { get => rawValue; set => rawValue = value; }
+        public decimal? ResultValue { get => resultValue; set => resultValue = value; }
 
-        public ValueRowDefinition(int? rawValue, int? resultValue)
+        public ValueRowDefinition(decimal? rawValue, decimal? resultValue)
         {
             this.RawValue = rawValue;
             this.ResultValue = resultValue;
