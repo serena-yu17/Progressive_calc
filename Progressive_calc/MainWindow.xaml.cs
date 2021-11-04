@@ -34,15 +34,9 @@ namespace Progressive_calc
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var breakPoints = new List<BreakpointDefinition> { new BreakpointDefinition(0, 0) };
-            breakPoints.AddRange(
-                appDataContext.BreakpointDefinition
-                .Where(item => item.Breakpoint != null && item.Additional_price != null && item.Breakpoint > 0)
-                .OrderBy(item => item.Breakpoint)
-            );
+        {            
 
-            var newRowDefs = BreakPointServices.ProcessBreakPoints(appDataContext.ValueRowDefinition, breakPoints);
+            var newRowDefs = BreakPointServices.ProcessBreakPoints(appDataContext.ValueRowDefinition, appDataContext.BreakpointDefinition);
             appDataContext.ValueRowDefinition = new ObservableCollection<ValueRowDefinition>(newRowDefs);
             DGValues.ItemsSource = newRowDefs;
         }
