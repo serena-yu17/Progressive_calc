@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Progressive_calc.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MoralesLarios.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MoralesLarios.Utilities.1.0.0.1\lib\net45\MoralesLarios.Utilities.dll</HintPath>

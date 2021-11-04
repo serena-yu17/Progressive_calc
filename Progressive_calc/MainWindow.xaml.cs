@@ -34,11 +34,10 @@ namespace Progressive_calc
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {            
-
+        {
             var newRowDefs = BreakPointServices.ProcessBreakPoints(appDataContext.ValueRowDefinition, appDataContext.BreakpointDefinition);
             appDataContext.ValueRowDefinition = new ObservableCollection<ValueRowDefinition>(newRowDefs);
-            DGValues.ItemsSource = newRowDefs;
+            DGValues.ItemsSource = appDataContext.ValueRowDefinition;
         }
 
 
