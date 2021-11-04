@@ -4,17 +4,14 @@ namespace Progressive_calc.models
 {
     public class BreakpointDefinition
     {
-        private decimal? breakpoint;
-        private decimal? additional_price;
-
-        public decimal? Breakpoint { get => breakpoint; set => breakpoint = value; }
-        public decimal? Additional_price { get => additional_price; set => additional_price = value; }
+        public decimal? Breakpoint { get; set; }
+        public decimal? Additional_price { get; set; }
 
 
         public BreakpointDefinition(decimal? breakpointValue, decimal? price)
         {
-            this.Breakpoint = breakpointValue;
-            this.Additional_price = price;
+            Breakpoint = breakpointValue;
+            Additional_price = price;
         }
 
         public BreakpointDefinition() { }
@@ -22,16 +19,13 @@ namespace Progressive_calc.models
 
     public class ValueRowDefinition
     {
-        private decimal? rawValue;
-        private decimal? resultValue;
-
-        public decimal? RawValue { get => rawValue; set => rawValue = value; }
-        public decimal? ResultValue { get => resultValue; set => resultValue = value; }
+        public decimal? RawValue { get; set; }
+        public decimal? ResultValue { get; set; }
 
         public ValueRowDefinition(decimal? rawValue, decimal? resultValue)
         {
-            this.RawValue = rawValue;
-            this.ResultValue = resultValue;
+            RawValue = rawValue;
+            ResultValue = resultValue;
         }
 
         public ValueRowDefinition() { }
@@ -48,7 +42,7 @@ namespace Progressive_calc.models
         public AppDataContext() { }
 
         public ObservableCollection<BreakpointDefinition> BreakpointDefinition { get; set; }
-        public ObservableCollection<ValueRowDefinition> ValueRowDefinition { get; set; }        
+        public ObservableCollection<ValueRowDefinition> ValueRowDefinition { get; set; }
     }
 
     public class ColumnNameAttribute : System.Attribute
